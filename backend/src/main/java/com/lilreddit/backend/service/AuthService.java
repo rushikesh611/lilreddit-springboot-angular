@@ -1,6 +1,7 @@
 package com.lilreddit.backend.service;
 
 import com.lilreddit.backend.dto.RegisterRequest;
+import com.lilreddit.backend.exceptions.SpringRedditException;
 import com.lilreddit.backend.models.NotificationEmail;
 import com.lilreddit.backend.models.User;
 import com.lilreddit.backend.models.VerificationToken;
@@ -8,11 +9,11 @@ import com.lilreddit.backend.repository.UserRepository;
 import com.lilreddit.backend.repository.VerificationTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -48,5 +49,19 @@ public class AuthService {
 
         verificationTokenRepository.save(verificationToken);
         return token;
+    }
+
+    @Transactional
+    private void fetchUserAndEnable(VerificationToken verificationToken) {
+        String username = verificationToken.getUser().getUsername();
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringRedditException("User not found with name - " + username));
+        user.setEnabled(true);
+        userRepository.save(user);
+    }
+
+    public void verifyAccount(String token) {
+        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
+        verificationToken.orElseThrow(() -> new SpringRedditException("Invalid Token"));
+        fetchUserAndEnable(verificationToken.get());
     }
 }
