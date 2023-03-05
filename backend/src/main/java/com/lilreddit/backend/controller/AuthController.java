@@ -1,5 +1,7 @@
 package com.lilreddit.backend.controller;
 
+import com.lilreddit.backend.dto.AuthenticationResponse;
+import com.lilreddit.backend.dto.LoginRequest;
 import com.lilreddit.backend.dto.RegisterRequest;
 import com.lilreddit.backend.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -23,5 +25,10 @@ public class AuthController {
     public ResponseEntity<String> verifyAccount(@PathVariable String token) {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account Activated Successfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
     }
 }
