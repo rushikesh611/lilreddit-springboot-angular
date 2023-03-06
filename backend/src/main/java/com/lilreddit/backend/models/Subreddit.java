@@ -27,7 +27,7 @@ public class Subreddit {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Post   > posts;
+    private List<Post> posts;
     private Instant createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
