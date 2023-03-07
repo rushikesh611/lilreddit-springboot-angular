@@ -2,8 +2,11 @@ package com.lilreddit.backend.controller;
 
 import com.lilreddit.backend.dto.AuthenticationResponse;
 import com.lilreddit.backend.dto.LoginRequest;
+import com.lilreddit.backend.dto.RefreshTokenRequest;
 import com.lilreddit.backend.dto.RegisterRequest;
 import com.lilreddit.backend.service.AuthService;
+import com.lilreddit.backend.service.RefreshTokenService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest){
@@ -31,4 +35,16 @@ public class AuthController {
     public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
         return authService.login(loginRequest);
     }
+
+    @PostMapping("refresh/token")
+    public AuthenticationResponse refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest){
+        return authService.refreshToken(refreshTokenRequest);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
+        return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully!!");
+    }
+
 }
