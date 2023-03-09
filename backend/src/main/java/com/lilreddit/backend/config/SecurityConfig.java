@@ -54,6 +54,8 @@ public class SecurityConfig{
                                 .permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/posts/")
                                 .permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/posts/**")
+                                .permitAll()
                                 .anyRequest()
                                 .authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
