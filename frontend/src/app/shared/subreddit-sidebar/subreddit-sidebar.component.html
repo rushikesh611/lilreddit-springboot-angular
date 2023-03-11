@@ -1,0 +1,13 @@
+<div class="p-2">
+  <div class="border rounded p-2 h-60 overflow-hidden relative shadow-md">
+    <div class="text-gray-600 text-lg font-medium mb-2">Browse Subreddits</div>
+    <hr class="mb-3"/>
+    <span *ngFor="let subreddit of subreddits">
+        <span class="font-normal text-sms"><a href="/view-subreddit/{{subreddit.id}}">r/{{subreddit.name}}</a></span>
+        <hr />
+    </span>
+    <div class="text-center my-2" *ngIf="displayViewAll">
+        <a class="font-medium text-gray-600 text-sm" routerLink="/list-subreddits">View All</a>
+    </div>
+  </div>
+</div>
