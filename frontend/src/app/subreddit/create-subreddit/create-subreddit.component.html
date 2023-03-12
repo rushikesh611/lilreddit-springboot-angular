@@ -1,0 +1,17 @@
+<div class="flex items-center bg-white">
+<div class="container mx-auto">
+    <div class="max-w-md mx-auto my-10">
+      <form [formGroup]="createSubredditForm" (ngSubmit)="createSubreddit()">
+          <div class="my-3 text-3xl font-semibold text-gray-700">Create Subreddit</div>
+          <input type="text" [formControlName]="'title'" class="my-2 w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-indigo-300"
+            placeholder="Title">
+          <textarea type="text" [formControlName]="'description'" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-indigo-300"
+            placeholder="Description"></textarea>
+            <div class="mt-4 float-right">
+              <button (click)="discard()" class="mr-2 bg-transparent border-red-400 text-red-400 border-[1px] rounded text-center no-underline py-2 px-3 opacity-100 hover:opacity-60">Discard</button>
+              <button (click)="createSubreddit()" class="bg-transparent border-[#0079D3] text-[#0079D3] border-[1px] rounded text-center no-underline py-2 px-3 opacity-100 hover:opacity-60">Create</button>
+            </div>
+      </form>
+    </div>
+  </div>
+</div>

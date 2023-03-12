@@ -1,0 +1,78 @@
+<div class="m-6">
+  <div class="flex justify-center bg-white">
+    <div class="">
+      <form
+        class="post-form"
+        [formGroup]="createPostForm"
+        (ngSubmit)="createPost()"
+      >
+        <div class="form-group">
+          <div class="cmy-3 text-3xl font-semibold text-gray-700">
+            Create Post
+          </div>
+          <input
+            type="text"
+            [formControlName]="'postName'"
+            class="my-2 w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-indigo-300"
+            placeholder="Title"
+          />
+
+          <input
+            type="text"
+            class="my-2 w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-indigo-300"
+            [formControlName]="'url'"
+            placeholder="URL"
+          />
+
+          <select
+            class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
+            [formControlName]="'subredditName'"
+          >
+            <option value="" selected disabled>Select subreddit</option>
+            <option *ngFor="let subreddit of subreddits">
+              {{ subreddit.name }}
+            </option>
+          </select>
+
+          <!-- <textarea
+            class="my-2 w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-indigo-300"
+            [formControlName]="'description'"
+            placeholder="Description"
+          ></textarea> -->
+
+          <editor
+            [formControlName]="'description'"
+            [init]="{
+              height: 200,
+              menubar: false,
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+              ],
+              toolbar:
+                'undo redo | formatselect | bold italic backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | removeformat | help'
+            }"
+          ></editor>
+          <span>
+            <div class="mt-4 float-right">
+              <button
+                (click)="discardPost()"
+                class="mr-2 bg-transparent border-red-400 text-red-400 border-[1px] rounded text-center no-underline py-2 px-3 opacity-100 hover:opacity-60"
+              >
+                Discard
+              </button>
+              <button
+                class="bg-transparent border-[#0079D3] text-[#0079D3] border-[1px] rounded text-center no-underline py-2 px-3 opacity-100 hover:opacity-60"
+              >
+                Post
+              </button>
+            </div>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
