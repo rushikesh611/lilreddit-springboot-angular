@@ -35,24 +35,17 @@ export class AuthService {
   }
 
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
-    return this.httpClient
-      .post<LoginResponse>(
-        'http://localhost:8080/api/auth/login',
-        loginRequestPayload
-      )
-      .pipe(
-        map((data) => {
-          this.localStorage.store(
-            'authenticationToken',
-            data.authenticationToken
-          );
-          this.localStorage.store('username', data.username);
-          this.localStorage.store('refreshToken', data.refreshToken);
-          this.localStorage.store('expiresAt', data.expiresAt);
+    return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
+      loginRequestPayload).pipe(map(data => {
+        this.localStorage.store('authenticationToken', data.authenticationToken);
+        this.localStorage.store('username', data.username);
+        this.localStorage.store('refreshToken', data.refreshToken);
+        this.localStorage.store('expiresAt', data.expiresAt);
 
-          return true;
-        })
-      );
+        this.loggedIn.emit(true);
+        this.username.emit(data.username);
+        return true;
+      }));
   }
 
   getJwtToken() {

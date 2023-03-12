@@ -1,5 +1,5 @@
 <div class="m-6 flex flex-col items-center">
-  <div><fa-icon [icon]="faArrowUp"/></div>
+  <div><fa-icon (click)="upvotePost()" [style.color]="post.upVote ? 'green':''" [icon]="faArrowUp"/></div>
   <div>{{post.voteCount}}</div>
-  <div><fa-icon [icon]="faArrowDown"/></div>
+  <div><fa-icon (click)="downvotePost()" [icon]="faArrowDown" [style.color]="post.downVote ? 'red':''"/></div>
 </div>

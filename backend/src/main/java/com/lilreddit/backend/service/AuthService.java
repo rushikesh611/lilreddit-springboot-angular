@@ -11,6 +11,7 @@ import com.lilreddit.backend.models.User;
 import com.lilreddit.backend.models.VerificationToken;
 import com.lilreddit.backend.repository.UserRepository;
 import com.lilreddit.backend.repository.VerificationTokenRepository;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -109,5 +110,10 @@ public class AuthService {
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
                 .username(refreshTokenRequest.getUsername())
                 .build();
+    }
+
+    public boolean isLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 }
