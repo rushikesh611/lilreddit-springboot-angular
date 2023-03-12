@@ -6,35 +6,46 @@ import { HomeComponent } from './home/home.component';
 import { CreatePostComponent } from './post/create-post/create-post.component';
 import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
+import { ViewPostComponent } from './post/view-post/view-post.component';
+import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
     path: 'sign-up',
-    component: SignupComponent
-  },{
+    component: SignupComponent,
+  },
+  {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'create-post',
-    component: CreatePostComponent
+    component: CreatePostComponent,
+  },
+  {
+    path: 'view-post/:id',
+    component: ViewPostComponent,
   },
   {
     path: 'create-subreddit',
-    component: CreateSubredditComponent
+    component: CreateSubredditComponent,
   },
   {
     path: 'list-subreddits',
-    component: ListSubredditsComponent
+    component: ListSubredditsComponent,
+  },
+  {
+    path: 'user-profile/:name',
+    component: UserProfileComponent,
   },
   {
     path: '',
-    component: HomeComponent
-  }
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

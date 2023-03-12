@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { PostModel } from '../post-model';
 import { PostService } from '../post.service';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-post-tile',
   templateUrl: './post-tile.component.html',
-  styleUrls: ['./post-tile.component.css']
+  styleUrls: ['./post-tile.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class PostTileComponent {
+export class PostTileComponent  implements OnInit{
 
+  @Input() posts!: PostModel[];
 
-  posts$ : PostModel[] | undefined;
+  constructor(private router: Router) { }
 
-  constructor(private postService: PostService) {
-    this.postService.getAllPosts().subscribe(post => {
-      this.posts$ = post;
-      console.log(this.posts$)
-    });
+  ngOnInit(): void {
+  }
+
+  goToPost(id: number): void {
+    this.router.navigateByUrl('/view-post/' + id);
   }
 }

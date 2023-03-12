@@ -9,7 +9,7 @@ import { SubredditService } from 'src/app/subreddit/subreddit.service';
 })
 export class SubredditSidebarComponent {
 
-  subreddits: Array<SubredditModel> = [];
+  subreddits: SubredditModel[] = [];
   displayViewAll: boolean = false;
 
   constructor(private subredditService: SubredditService) {

@@ -22,7 +22,9 @@ import { CreatePostComponent } from './post/create-post/create-post.component';
 import { TokenInterceptor } from './token-interceptor';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
-
+import { ViewPostComponent } from './post/view-post/view-post.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     SubredditSidebarComponent,
     CreateSubredditComponent,
     CreatePostComponent,
-    ListSubredditsComponent
+    ListSubredditsComponent,
+    ViewPostComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     NgxWebstorageModule.forRoot(),
     ToastrModule.forRoot(),
     FontAwesomeModule,
-    EditorModule
+    EditorModule,
+    MatMenuModule
   ],
   providers: [
     {
