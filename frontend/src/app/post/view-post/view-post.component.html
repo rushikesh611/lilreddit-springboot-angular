@@ -23,6 +23,9 @@
           <div>
             <p class="mb-4" [innerHtml]="post.description"></p>
           </div>
+          <div>
+            <img src={{post.url}} alt="">
+          </div>
           <div class="">
             <form [formGroup]="commentForm" (ngSubmit)="postComment()">
               <div class="">
