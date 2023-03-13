@@ -4,7 +4,7 @@
       <h2 class="my-3 text-3xl font-semibold text-gray-700">List of Subreddits</h2>
       <ul class="border border-gray-200 rounded overflow-hidden ">
         <li *ngFor="let subreddit of subreddits" class="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
-            <a routerLink="/view-subreddit/{{subreddit.id}}">{{subreddit.name}}</a>
+            <a routerLink="/view-subreddit/{{subreddit.id}}">r/{{subreddit.name}}</a>
         </li>
       </ul>
     </div>

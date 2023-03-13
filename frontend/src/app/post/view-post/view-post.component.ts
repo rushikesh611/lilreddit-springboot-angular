@@ -14,7 +14,19 @@ import { PostService } from 'src/app/shared/post.service';
 })
 export class ViewPostComponent {
   postId: number;
-  post!: PostModel;
+  post: PostModel = {
+    id: this.activateRoute.snapshot.params['id'],
+    postName: '',
+    url: '',
+    description: '',
+    voteCount: 0,
+    userName: '',
+    subredditName: '',
+    commentCount: 0,
+    duration: '',
+    upVote: false,
+    downVote: false
+  }
   commentForm: FormGroup;
   commentPayload: CommentPayload;
   comments: CommentPayload[] = [];
@@ -40,9 +52,8 @@ export class ViewPostComponent {
   postComment() {
     this.commentPayload.text = this.commentForm.get('text')?.value;
     this.commentService.postComment(this.commentPayload).subscribe(data => {
-      // this.commentForm.get('text')?.setValue('');
-      // this.getCommentsForPost();
-      console.log(data);
+      this.commentForm.get('text')?.setValue('');
+      this.getCommentsForPost();
     }, error => {
       throwError(error);
     })

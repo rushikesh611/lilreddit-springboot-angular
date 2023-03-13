@@ -1,16 +1,16 @@
-<div class="container">
-  <div>
+<div class="p-4">
+  <div class="mb-6">
     Welcome <b>{{name}}</b>.<br /> You have posted <b>{{postLength}}</b> time(s) and commented
     <b>{{commentLength}}</b> time(s).
     You can check your post and comment history below.
   </div>
   <hr />
-  <div>
+  <div class="font-medium text-xl my-2">
     Your Posts:
   </div>
   <app-post-tile [posts]="posts"></app-post-tile>
-  <hr />
-  <div>
+  <hr class="mt-10"/>
+  <div class="font-medium text-xl my-2">
     Your Comments:
   </div>
   <div *ngFor="let comment of comments">
